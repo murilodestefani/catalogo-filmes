@@ -8,7 +8,11 @@ export default {
     "./node_modules/@nextui-org/theme/dist/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
-    extend: {},
+    extend: {
+      aspectRatio: {
+        "9/16": "9 / 16",
+      },
+    },
   },
   darkMode: "class",
   plugins: [nextui()],
