@@ -148,7 +148,7 @@ function App() {
           <NavbarItem>
             <Button
               className="bg-gradient-to-r from-yellow-200 via-yellow-400 to-yellow-700"
-              onPress={onOpen}
+              onClick={onOpen}
               color="default"
               variant="shadow"
             >
