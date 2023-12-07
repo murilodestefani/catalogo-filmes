@@ -340,41 +340,41 @@ function App() {
               </ModalBody>
               <ModalFooter>
                 <Button
+                  className="bg-gradient-to-r from-yellow-200 via-yellow-400 to-yellow-700"
                   color="primary"
                   variant="solid"
                   onClick={editingIndex !== null ? saveEdit : addMovie}
                 >
-                  {editingIndex !== null ? "Alterar" : "Cadastrar"}
+                  <p className="text-black">
+                    {editingIndex !== null ? "Alterar" : "Cadastrar"}
+                  </p>
                 </Button>
                 <Button
-                  color="primary"
-                  variant="ghost"
+                  className="border-yellow-400 hover:bg-yellow-600"
+                  color="default"
+                  variant="bordered"
                   onClick={resetMovieForm}
                 >
-                  Limpar
+                  <p className="text-yellow-400">Limpar</p>
                 </Button>
               </ModalFooter>
             </>
           )}
         </ModalContent>
       </Modal>
-      <footer className="flex flex-col items-center justify-center gap-2 p-4">
+      <footer className="container flex flex-col items-center justify-center gap-2 p-4">
+        <img
+          className="w-32"
+          src="/IFMS-NA.png"
+          alt="IFMS
+Instituto Federal de Mato Grosso do Sul"
+        />
         <span className="font-bold">Frameworks 1</span>
         <div className="flex items-center justify-center gap-3">
           <span className="italic">Desenvolvido por</span>
           <AvatarGroup isBordered>
-            <Avatar
-              size="sm"
-              isBordered
-              color="warning"
-              src="https://source.unsplash.com/random/?user"
-            />
-            <Avatar
-              size="sm"
-              isBordered
-              color="warning"
-              src="https://source.unsplash.com/random/?user"
-            />
+            <Avatar size="sm" isBordered color="warning" src="/Murilo.png" />
+            <Avatar size="sm" isBordered color="warning" src="/Gustavo.png" />
           </AvatarGroup>
         </div>
       </footer>
