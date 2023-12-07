@@ -42,8 +42,8 @@ function App() {
     name: string;
     cover: string;
     synopsis: string;
-    rating: number;
-    premiere: number;
+    rating: number | null;
+    premiere: number | null;
   }
   const inputNameRef = useRef<HTMLInputElement>(null);
   const inputCoverRef = useRef<HTMLInputElement>(null);
@@ -57,8 +57,8 @@ function App() {
     name: "",
     cover: "https://source.unsplash.com/random/?movie",
     synopsis: "",
-    rating: 0,
-    premiere: 0,
+    rating: null,
+    premiere: null,
   });
 
   const addMovie = useCallback(() => {
@@ -75,12 +75,9 @@ function App() {
       onOpen;
       inputNameRef.current?.focus();
       const MovieList = [newMovie, ...movies];
-
       setMovies(MovieList);
-
-      resetMovieForm();
-
       localStorage.setItem("movie_list", JSON.stringify(MovieList));
+      resetMovieForm();
     }
   }, [movies, newMovie, onOpen]);
 
@@ -104,8 +101,8 @@ function App() {
       updatedMovies[editingIndex] = newMovie;
       setMovies(updatedMovies);
       setEditingIndex(null);
-      resetMovieForm();
       localStorage.setItem("movie_list", JSON.stringify(updatedMovies));
+      resetMovieForm();
     }
   };
 
@@ -117,7 +114,6 @@ function App() {
 
   useEffect(() => {
     const storedMovies = localStorage.getItem("movie_list");
-
     if (storedMovies) {
       setMovies(JSON.parse(storedMovies));
     }
@@ -128,8 +124,8 @@ function App() {
       name: "",
       cover: "https://source.unsplash.com/random/?movie",
       synopsis: "",
-      rating: 0,
-      premiere: 0,
+      rating: null,
+      premiere: null,
     });
   };
 
@@ -146,7 +142,7 @@ function App() {
           className="flex items-center justify-center gap-1"
         >
           <FilmReel size={32} weight="duotone" color="#facc15" />
-          <p className="font-bold text-inherit">Catálogo de Filmes</p>
+          <p className="font-bold text-foreground">Catálogo de Filmes</p>
         </NavbarBrand>
         <NavbarContent justify="end">
           <NavbarItem>
@@ -242,6 +238,7 @@ function App() {
       </section>
 
       <Modal
+        size="sm"
         isOpen={isOpen}
         onOpenChange={onOpenChange}
         placement="center"
@@ -306,7 +303,6 @@ function App() {
                   type="number"
                   min={0}
                   max={10}
-                  step={0.5}
                   endContent={
                     <Star className="pointer-events-none flex-shrink-0 text-2xl text-default-400" />
                   }
@@ -314,13 +310,16 @@ function App() {
                   description="Nota de 0 à 10"
                   value={String(newMovie.rating)}
                   onChange={(e) =>
-                    setNewMovie({ ...newMovie, rating: parseInt(e.target.value) })
+                    setNewMovie({
+                      ...newMovie,
+                      rating: parseInt(e.target.value),
+                    })
                   }
                   ref={inputRatingRef}
                   variant="bordered"
                 />
                 <Input
-                  type="year"
+                  type="number"
                   min={1900}
                   max={2100}
                   endContent={
@@ -330,7 +329,10 @@ function App() {
                   description="Ano de estréia"
                   value={String(newMovie.premiere)}
                   onChange={(e) =>
-                    setNewMovie({ ...newMovie, premiere: parseInt(e.target.value) })
+                    setNewMovie({
+                      ...newMovie,
+                      premiere: parseInt(e.target.value),
+                    })
                   }
                   ref={inputPremiereRef}
                   variant="bordered"
