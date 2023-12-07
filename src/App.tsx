@@ -249,7 +249,7 @@ function App() {
         }}
       >
         <ModalContent>
-          {(onClose) => (
+          {
             <>
               <ModalHeader className="flex flex-col gap-1">
                 {editingIndex !== null ? "Editar Filme" : "Cadastrar Filme"}
@@ -359,7 +359,7 @@ function App() {
                 </Button>
               </ModalFooter>
             </>
-          )}
+          }
         </ModalContent>
       </Modal>
       <footer className="container flex flex-col items-center justify-center gap-2 p-4">
