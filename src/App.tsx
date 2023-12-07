@@ -42,12 +42,12 @@ function App() {
     name: string;
     cover: string;
     synopsis: string;
-    rating: number | string;
-    premiere: number | string;
+    rating: number;
+    premiere: number;
   }
   const inputNameRef = useRef<HTMLInputElement>(null);
   const inputCoverRef = useRef<HTMLInputElement>(null);
-  const inputSynopsisRef = useRef<HTMLInputElement>(null);
+  const inputSynopsisRef = useRef<HTMLTextAreaElement>(null);
   const inputRatingRef = useRef<HTMLInputElement>(null);
   const inputPremiereRef = useRef<HTMLInputElement>(null);
 
@@ -57,8 +57,8 @@ function App() {
     name: "",
     cover: "https://source.unsplash.com/random/?movie",
     synopsis: "",
-    rating: "",
-    premiere: "",
+    rating: 0,
+    premiere: 0,
   });
 
   const addMovie = useCallback(() => {
@@ -82,7 +82,7 @@ function App() {
 
       localStorage.setItem("movie_list", JSON.stringify(MovieList));
     }
-  }, [movies, newMovie]);
+  }, [movies, newMovie, onOpen]);
 
   const deleteMovie = (index: number) => {
     const updatedMovies = [...movies];
@@ -128,8 +128,8 @@ function App() {
       name: "",
       cover: "https://source.unsplash.com/random/?movie",
       synopsis: "",
-      rating: "",
-      premiere: "",
+      rating: 0,
+      premiere: 0,
     });
   };
 
@@ -143,7 +143,6 @@ function App() {
         <NavbarBrand
           as={Link}
           href="/"
-          color="foreground"
           className="flex items-center justify-center gap-1"
         >
           <FilmReel size={32} weight="duotone" color="#facc15" />
@@ -266,6 +265,7 @@ function App() {
                   }
                   autoFocus
                   label="Nome"
+                  description="Nome do Filme"
                   value={newMovie.name}
                   onChange={(e) =>
                     setNewMovie({ ...newMovie, name: e.target.value })
@@ -280,8 +280,8 @@ function App() {
                     <FilmStrip className="pointer-events-none flex-shrink-0 text-2xl text-default-400" />
                   }
                   label="Capa"
+                  description="Url da imagem da Capa"
                   value={newMovie.cover}
-                  defaultValue="https://source.unsplash.com/random/?cinema"
                   onChange={(e) =>
                     setNewMovie({ ...newMovie, cover: e.target.value })
                   }
@@ -294,6 +294,7 @@ function App() {
                     <FilmScript className="pointer-events-none flex-shrink-0 text-2xl text-default-400" />
                   }
                   label="Sinopse"
+                  description="Texto da Sinopse"
                   value={newMovie.synopsis}
                   onChange={(e) =>
                     setNewMovie({ ...newMovie, synopsis: e.target.value })
@@ -310,9 +311,10 @@ function App() {
                     <Star className="pointer-events-none flex-shrink-0 text-2xl text-default-400" />
                   }
                   label="Avaliação"
-                  value={newMovie.rating}
+                  description="Nota de 0 à 10"
+                  value={String(newMovie.rating)}
                   onChange={(e) =>
-                    setNewMovie({ ...newMovie, rating: e.target.value })
+                    setNewMovie({ ...newMovie, rating: parseInt(e.target.value) })
                   }
                   ref={inputRatingRef}
                   variant="bordered"
@@ -325,9 +327,10 @@ function App() {
                     <Popcorn className="pointer-events-none flex-shrink-0 text-2xl text-default-400" />
                   }
                   label="Estréia"
-                  value={newMovie.premiere}
+                  description="Ano de estréia"
+                  value={String(newMovie.premiere)}
                   onChange={(e) =>
-                    setNewMovie({ ...newMovie, premiere: e.target.value })
+                    setNewMovie({ ...newMovie, premiere: parseInt(e.target.value) })
                   }
                   ref={inputPremiereRef}
                   variant="bordered"
