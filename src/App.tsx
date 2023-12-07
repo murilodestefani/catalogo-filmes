@@ -355,18 +355,23 @@ function App() {
       </Modal>
       <footer className="flex flex-col items-center justify-center gap-2 p-4">
         <span className="font-bold">Frameworks 1</span>
-        <AvatarGroup isBordered>
-          <Avatar
-            isBordered
-            color="warning"
-            src="https://source.unsplash.com/random/?user"
-          />
-          <Avatar
-            isBordered
-            color="warning"
-            src="https://source.unsplash.com/random/?user"
-          />
-        </AvatarGroup>
+        <div className="flex items-center justify-center gap-3">
+          <span className="italic">Desenvolvido por</span>
+          <AvatarGroup isBordered>
+            <Avatar
+              size="sm"
+              isBordered
+              color="warning"
+              src="https://source.unsplash.com/random/?user"
+            />
+            <Avatar
+              size="sm"
+              isBordered
+              color="warning"
+              src="https://source.unsplash.com/random/?user"
+            />
+          </AvatarGroup>
+        </div>
       </footer>
     </>
   );
